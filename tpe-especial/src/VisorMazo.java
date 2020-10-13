@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class VisorMazo {
+public class VisorMazo { 
 
     public static void mostrarMazo(String jsonFile) {
         //URL url = getClass().getResource(jsonFile);
