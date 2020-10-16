@@ -23,11 +23,11 @@
     {
       "nombre": "Mantis",
       "atributos": {
-      "altura": 165,
-      "peso": 80,
-      "fuerza": 110,
-      "peleas ganadas": 7,
-      "velocidad": 99
+        "altura": 165,
+        "peso": 80,
+        "fuerza": 110,
+        "peleas ganadas": 7,
+        "velocidad": 99
       }
     },
     {
@@ -120,7 +120,7 @@
       }
     },
     {
-      "nombre": "Faraón dorado",
+      "nombre": "FaraÃ³n dorado",
       "atributos": {
         "altura": 189,
         "peso": 88,
@@ -160,7 +160,7 @@
       }
     },
     {
-      "nombre": "Hombre Halcón",
+      "nombre": "Hombre HalcÃ³n",
       "atributos": {
         "altura": 196,
         "peso": 95,
@@ -170,7 +170,7 @@
       }
     },
     {
-      "nombre": "Guasón",
+      "nombre": "GuasÃ³n",
       "atributos": {
         "altura": 170,
         "peso": 67,
@@ -200,7 +200,7 @@
       }
     },
     {
-      "nombre": "Pigüino",
+      "nombre": "PigÃ¼ino",
       "atributos": {
         "altura": 160,
         "peso": 90,
@@ -370,7 +370,7 @@
       }
     },
     {
-      "nombre": "Mujer araña",
+      "nombre": "Mujer araÃ±a",
       "atributos": {
         "altura": 176,
         "peso": 56,
@@ -429,6 +429,5 @@
         "velocidad": 130
       }
     }
-	
   ]
 }
