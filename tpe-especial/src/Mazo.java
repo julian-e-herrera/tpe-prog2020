@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Mazo {
 
@@ -21,8 +22,15 @@ public class Mazo {
         this.procesar(mazoPath);
     }
 
-    public ArrayList<Carta> devolverMazo() {
-        return new ArrayList<Carta>(mazoCartas);
+    public boolean contieneCarta(Carta ff){
+        boolean contiene = false;
+
+        for (Carta carta : mazoCartas) {
+            if (carta.esIgual(ff)) {
+                return true;
+            }
+        }
+        return contiene;
     }
 
     public void procesar(String jsonFile) {
@@ -40,18 +48,18 @@ public class Mazo {
 
             for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
                 // cartaAux es una carta creada donde le asigno el nombre
-                Carta cartaAux = new Carta(carta.getString("nombre"));
-
+                
                 // agarro los atributos del json
                 JsonObject atributos = carta.getJsonObject("atributos");
-
+                ArrayList<Atributo> atributosDeCarta = new ArrayList<Atributo>();
                 // los recorro
                 for (String atributo : atributos.keySet()) {
-
+                    
                     // asigno nombre, valor
                     Atributo atributoAux = new Atributo(atributo, atributos.getInt(atributo));
-                    cartaAux.agregarAtributo(atributoAux);
+                    atributosDeCarta.add(atributoAux);
                 }
+                Carta cartaAux = new Carta(carta.getString("nombre"), atributosDeCarta);
                 mazoCartas.add(cartaAux);
             }
 
@@ -67,7 +75,7 @@ public class Mazo {
     private void filtrarPorCarta(Carta cartaReferencia) {
         ArrayList<Carta> mazoFiltrado = new ArrayList<Carta>();
         for (Carta carta : mazoCartas) {
-            if (cartaReferencia.esMismoTipo(carta)) {
+            if (cartaReferencia.equals(carta)) {
                 mazoFiltrado.add(carta);
             }
         }
@@ -80,10 +88,11 @@ public class Mazo {
 
     public void repartirCartas(Jugador j1, Jugador j2) {
 
-        // aca falta el shuffle de la interfaz, ni idea como se implementa...TODAVIA
+        Collections.shuffle(mazoCartas);
 
         // si el mazo es par...
         if (mazoCartas.size() % 2 == 0) {
+
             for (int i = 0; i < mazoCartas.size() / 2; i++) {
                 j1.addCarta(mazoCartas.get(i));
             }

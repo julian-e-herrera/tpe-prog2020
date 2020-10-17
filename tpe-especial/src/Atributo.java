@@ -1,8 +1,10 @@
+
+
 public class Atributo {
     private String nombre;
-    private double valor;
+    private int valor;
 
-    public Atributo(String nombre, double valor) {
+    public Atributo(String nombre, int valor) {
         this.nombre = nombre;
         this.valor = valor;
     }
@@ -11,7 +13,7 @@ public class Atributo {
         return nombre;
     }
 
-    public double getValor() {
+    public int getValor() {
         return valor;
     }
 
@@ -30,12 +32,16 @@ public class Atributo {
     public boolean equals(Object obj) {
         try {
             Atributo aux = (Atributo) obj;
-            if ((aux.getNombre().equals(nombre)) && (aux.getValor() == valor)) {
+            if ((aux.getNombre().equals(nombre))) {
                 return true;
             } else
                 return false;
         } catch (Exception e) {
             return false;
         }
+    }
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + ", " + "Valor: " + valor;
     }
 }

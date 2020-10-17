@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Jugador {
         private String nombre;
         private boolean esMano;
         private ArrayList<Carta> mazo;
 
-        public Jugador(String nombre){
+        public Jugador(String nombre) {
                 this.nombre = nombre;
                 esMano = false;
                 mazo = new ArrayList<Carta>();
@@ -31,37 +32,41 @@ public class Jugador {
                 return mazo.get(0);
         }
 
-        public int getLargoMazo(){
+        public int getLargoMazo() {
                 return mazo.size();
         }
 
         public void removerPrimerCarta() {
-                mazo.remove(getPrimerCarta());
+                mazo.remove(0);
         }
 
-        public void removerCarta(Carta ff){
+        public void removerCarta(Carta ff) {
                 mazo.remove(ff);
         }
 
-        public void CartaAlFinalDelMazo(Carta ff) {
+        public void moverCartaAlFondo(Carta ff) {
 
-                Carta aux = ff;
-
-                if (mazo.contains(ff)) {
-                        mazo.remove(ff);
-                }
-
-                mazo.add(mazo.size(), aux);
+                mazo.remove(ff);
+                mazo.add(ff);
 
         }
 
-        public String elegirAtributo(Carta ff) {
+        public void mezclar() {
+                Collections.shuffle(mazo);
+        }
+
+        @Override
+        public String toString() {
+                return nombre + ", " + "Cantidad de cartas: " + this.getLargoMazo();
+        }
+
+        public Atributo elegirAtributo(Carta ff) {
                 int atributo;
 
                 int atributos = ff.getCantAtributos();
 
                 atributo = (int) (Math.random() * atributos);
-                
-                return ff.getAtributo(atributo).getNombre();
+
+                return ff.getAtributo(atributo);
         }
 }

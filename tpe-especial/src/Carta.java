@@ -1,22 +1,22 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class Carta {
+public class Carta implements Comparator<Atributo> {
     private String nombre;
     private ArrayList<Atributo> atributos;
 
-    public Carta(String nombre) {
-        atributos = new ArrayList<Atributo>();
+    public Carta(String nombre, ArrayList<Atributo> atributosSueltos) {
+        atributos = new ArrayList<Atributo>(atributosSueltos);
         this.nombre = nombre;
-    }
-
-    public void agregarAtributo(Atributo ff) {
-        if (!atributos.contains(ff)) {
-            atributos.add(ff);
-        }
     }
 
     public String getNombre() {
         return nombre;
+    }
+
+    @Override
+    public int compare(Atributo a1, Atributo a2) {
+        return a1.getValor() - a2.getValor();
     }
 
     public int getCantAtributos() {
@@ -27,9 +27,19 @@ public class Carta {
         return new ArrayList<Atributo>(atributos);
     }
 
-
     public Atributo getAtributo(int i) {
         return atributos.get(i);
+    }
+
+    public Atributo getAtributo(Atributo a) {
+        //nunca te va a dar null, pero hay que poner algo xd
+        Atributo aux = null;
+        for (Atributo atributo : atributos) {
+            if (a.equals(atributo)) {
+                aux = atributo;
+            }
+        }
+        return aux;
     }
 
     public Atributo getAtributoPorNombre(String nombre) {
@@ -46,14 +56,17 @@ public class Carta {
         return atributos.get(i);
     }
 
+    public boolean esIgual(Carta ff){
+        return ((this.equals(ff)&& (ff.getNombre().equals(this.nombre))));
+    }
+
     @Override
     public boolean equals(Object obj) {
         try {
             Carta cartaAux = (Carta) obj;
 
-            // si la carta tiene nombre y tienen la misma cantidad de atributos, comprueba
-            // si
-            if ((cartaAux.getNombre().length() != 0) && (cartaAux.getCantAtributos() == atributos.size())) {
+            // si la carta tiene la misma cantidad de atributos, comprueba
+            if ((cartaAux.getCantAtributos() == atributos.size())) {
                 // si los nombres de los atributos son los mismos
                 for (Atributo atributo : cartaAux.getAllAtributos()) {
                     if (!(atributos.contains(atributo))) {
@@ -67,18 +80,6 @@ public class Carta {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public boolean esMismoTipo(Carta ff) {
-        if (ff.getCantAtributos() == atributos.size()) {
-            for (int i = 0; i < atributos.size(); i++) {
-                if (!(atributos.get(i).mismoTipo(ff.getAtributo(i)))) {
-                    return false;
-                }
-            }
-            return true;
-        } else
-            return false;
     }
 
     @Override
