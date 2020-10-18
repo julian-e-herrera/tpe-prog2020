@@ -52,24 +52,22 @@ public class Juego {
         while ((jugadorAuxiliar.getLargoMazo() > 0) && (jugadorOpuesto.getLargoMazo() > 0)) {
 
 
-            
             Atributo atributo = jugadorAuxiliar.elegirAtributo(jugadorAuxiliar.getPrimerCarta());
             Atributo atributoOpuesto = jugadorOpuesto.getPrimerCarta().getAtributo(atributo);
-            
-            System.out.println("El jugador " + jugadorAuxiliar.getNombre() + " Selecciona competir por el atributo " + atributo.getNombre());
-            
 
-            System.out.println(jugadorAuxiliar);
-            System.out.println(jugadorOpuesto);
+            // imprimir(jugadorAuxiliar);
+            System.out.println("El jugador " + jugadorAuxiliar.getNombre() + " Selecciona competir por el atributo " + atributo.getNombre());
+
+            // System.out.println(jugadorAuxiliar);
+            // System.out.println(jugadorOpuesto);
 
             System.out.println("-------------------------------------- " + rondas);
 
             int resultado = jugadorAuxiliar.getPrimerCarta().compare(atributo, atributoOpuesto);
 
-
             declararGanadorDeRonda(jugadorAuxiliar, jugadorOpuesto, resultado);
 
-            rondas--;
+            // rondas--;
         }
 
     }
@@ -105,17 +103,26 @@ public class Juego {
             jugadorAuxiliar.removerCarta(cartaPrincipal);
 
             // intercambiar jugadores
-            Jugador aux = jugadorAuxiliar;
-            Jugador aux2 = jugadorOpuesto;
+            // Jugador aux = jugadorAuxiliar;
+            // Jugador aux2 = jugadorOpuesto;
 
-            jugadorAuxiliar = aux2;
+            // jugadorAuxiliar = aux2;
+            // jugadorOpuesto = aux;
+
+            Jugador aux = jugadorAuxiliar;
+            jugadorAuxiliar = jugadorOpuesto;
             jugadorOpuesto = aux;
 
         } else {
             jugadorAuxiliar.moverCartaAlFondo(cartaPrincipal);
 
             jugadorOpuesto.moverCartaAlFondo(cartaSecundaria);
+            
         }
+    }
+
+    public void imprimir(Jugador ff) {
+        System.out.println(ff);
     }
 
     public Jugador encontrarOpuesto(Jugador ff) {

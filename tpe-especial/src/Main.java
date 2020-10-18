@@ -9,7 +9,7 @@ public class Main {
         Jugador jugador1 = new Jugador("Juan");
         Jugador jugador2 = new Jugador("Pablo");
 
-        Juego prueba = new Juego(jugador1, jugador2, 4, mazoPath);
+        Juego2 prueba = new Juego2(jugador1, jugador2, 4, mazoPath);
         prueba.jugar();
     }
 }
