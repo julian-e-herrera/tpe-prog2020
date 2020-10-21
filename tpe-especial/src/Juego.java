@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class Juego {
     private Jugador jugador1;
     private Jugador jugador2;
+    private Jugador jugadorAuxiliar;
+    private Jugador jugadorOpuesto;
     private int rondas;
     private Mazo mazoDeCartas;
     private ArrayList<Jugador> jugadores;
@@ -25,49 +27,36 @@ public class Juego {
         mazoDeCartas = new Mazo(mazoPath);
     }
 
-    // public void jugar() {
-    // comprobarMano();
-    // // repartir cartas
-    // // si el mazo es impar el jugador1 recibe una carta más. "mano"
-    // repartirMazo();
-    // // selecciona de su carta un atributo random
-    // // comparas atributo con el otro jugador
-    // // el que gana recibe las 2 cartas y las pongo al fondo de la pila
-    // // intercambiar variables para alternar de jugadores| esMano = true o false
-    // comprobarMano();
-    // // GoTo 13
-    // }
 
     public void jugar() {
 
-        Jugador jugadorAuxiliar;
-        Jugador jugadorOpuesto;
-
         jugadorAuxiliar = iniciarJuego();
         jugadorOpuesto = encontrarOpuesto(jugadorAuxiliar);
-
+        
         jugadorAuxiliar.mezclar();
         jugadorOpuesto.mezclar();
-
-        while ((jugadorAuxiliar.getLargoMazo() > 0) && (jugadorOpuesto.getLargoMazo() > 0)) {
-
+        int i = 1;
+        
+        while ((i <= rondas) && (jugadorAuxiliar.getLargoMazo() > 0) && (jugadorOpuesto.getLargoMazo() > 0)) {
+            
+            System.out.println("----------------- " + " ronda " + i + " -----------------");
 
             Atributo atributo = jugadorAuxiliar.elegirAtributo(jugadorAuxiliar.getPrimerCarta());
             Atributo atributoOpuesto = jugadorOpuesto.getPrimerCarta().getAtributo(atributo);
 
-            // imprimir(jugadorAuxiliar);
             System.out.println("El jugador " + jugadorAuxiliar.getNombre() + " Selecciona competir por el atributo " + atributo.getNombre());
-
-            // System.out.println(jugadorAuxiliar);
-            // System.out.println(jugadorOpuesto);
-
-            System.out.println("-------------------------------------- " + rondas);
-
+            System.out.println("La carta de " + jugadorAuxiliar.getNombre() + " es " + jugadorAuxiliar.getPrimerCarta().getNombre()+ " con " + atributo.getNombre() + " " + atributo.getValor());
+            System.out.println("La carta de " + jugadorOpuesto.getNombre() + " es " + jugadorOpuesto.getPrimerCarta().getNombre()+ " con " + atributoOpuesto.getNombre() + " " + atributoOpuesto.getValor());
+            
             int resultado = jugadorAuxiliar.getPrimerCarta().compare(atributo, atributoOpuesto);
+            declararGanadorDeRonda(resultado);
+            
 
-            declararGanadorDeRonda(jugadorAuxiliar, jugadorOpuesto, resultado);
+            System.out.println("Gana la ronda " + jugadorAuxiliar.getNombre());
+            System.out.println(jugadorAuxiliar.getNombre() + " posee ahora " + jugadorAuxiliar.getLargoMazo() + " cartas y " + jugadorOpuesto.getNombre() + " posee ahora " + jugadorOpuesto.getLargoMazo() + " cartas.");
 
-            // rondas--;
+            //María posee ahora 12 cartas y Juan posee ahora 8 cartas
+            i++;
         }
 
     }
@@ -83,7 +72,7 @@ public class Juego {
         return jugadorAuxiliar;
     }
 
-    public void declararGanadorDeRonda(Jugador jugadorAuxiliar, Jugador jugadorOpuesto, int resultado) {
+    public void declararGanadorDeRonda(int resultado) {
 
         Carta cartaPrincipal = jugadorAuxiliar.getPrimerCarta();
         Carta cartaSecundaria = jugadorOpuesto.getPrimerCarta();
@@ -101,13 +90,6 @@ public class Juego {
             jugadorOpuesto.addCarta(cartaPrincipal);
 
             jugadorAuxiliar.removerCarta(cartaPrincipal);
-
-            // intercambiar jugadores
-            // Jugador aux = jugadorAuxiliar;
-            // Jugador aux2 = jugadorOpuesto;
-
-            // jugadorAuxiliar = aux2;
-            // jugadorOpuesto = aux;
 
             Jugador aux = jugadorAuxiliar;
             jugadorAuxiliar = jugadorOpuesto;
