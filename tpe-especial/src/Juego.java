@@ -55,7 +55,6 @@ public class Juego {
             System.out.println("Gana la ronda " + jugadorAuxiliar.getNombre());
             System.out.println(jugadorAuxiliar.getNombre() + " posee ahora " + jugadorAuxiliar.getLargoMazo() + " cartas y " + jugadorOpuesto.getNombre() + " posee ahora " + jugadorOpuesto.getLargoMazo() + " cartas.");
 
-            //María posee ahora 12 cartas y Juan posee ahora 8 cartas
             i++;
         }
 
@@ -122,15 +121,4 @@ public class Juego {
         mazoDeCartas.repartirCartas(jugador1, jugador2);
 
     }
-
-    // public void comprobarMano() {
-    // if ((jugador1.getMano() == true)) {
-
-    // jugador1.setMano(false);
-    // jugador2.setMano(true);
-    // } else {
-    // jugador1.setMano(true);
-    // jugador2.setMano(false);
-    // }
-    // }
 }

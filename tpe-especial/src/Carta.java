@@ -10,6 +10,8 @@ public class Carta implements Comparator<Atributo> {
         this.nombre = nombre;
     }
 
+    public Carta(){}
+
     public String getNombre() {
         return nombre;
     }
@@ -40,6 +42,15 @@ public class Carta implements Comparator<Atributo> {
             }
         }
         return aux;
+    }
+
+    protected void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+
+    protected void setAtributos(ArrayList<Atributo> atributos){
+        atributos.clear();
+        atributos.addAll(atributos);
     }
 
     public Atributo getAtributoPorNombre(String nombre) {

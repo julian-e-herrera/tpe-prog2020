@@ -22,6 +22,10 @@ public class Mazo {
         this.procesar(mazoPath);
     }
 
+    protected ArrayList<Carta> getMazo(){
+        return new ArrayList<Carta>(mazoCartas);
+    }
+
     public boolean contieneCarta(Carta ff){
         boolean contiene = false;
 
@@ -110,6 +114,12 @@ public class Mazo {
                 j2.addCarta(mazoCartas.get(i));
             }
         }
+
+
+
+
+
+        
     }
 
 }
