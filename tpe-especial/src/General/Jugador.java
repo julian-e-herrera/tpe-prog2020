@@ -1,5 +1,9 @@
+package General;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import Estrategia.Estrategia;
+import Estrategia.EstrategiaTimbero;
 
 public class Jugador {
         private String nombre;

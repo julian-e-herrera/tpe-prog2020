@@ -1,3 +1,6 @@
+package Pocima;
+import General.Atributo;
+
 public class PocimaSelectiva extends Pocima {
     private String selector;
     private double porcentaje;

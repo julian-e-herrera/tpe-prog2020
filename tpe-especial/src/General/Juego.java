@@ -1,4 +1,7 @@
+package General;
 import java.util.ArrayList;
+
+import Pocima.Pocima;
 
 public class Juego {
     private Jugador jugador1;

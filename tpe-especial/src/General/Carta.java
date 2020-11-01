@@ -1,4 +1,7 @@
+package General;
 import java.util.ArrayList;
+
+import Pocima.Pocima;
 
 public class Carta {
     private String nombre;

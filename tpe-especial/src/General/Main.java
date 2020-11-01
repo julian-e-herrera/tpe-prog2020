@@ -1,9 +1,15 @@
+package General;
 import java.util.ArrayList;
+
+import Pocima.Pocima;
+import Pocima.PocimaFija;
+import Pocima.PocimaNormal;
+import Pocima.PocimaSelectiva;
 
 public class Main {
     public static void main(String[] args) {
 
-        String mazoPath = "./superheroes.json";
+        String mazoPath = "src/superheroes.json";
 
         ArrayList<Pocima> pocimas = new ArrayList<Pocima>();
 

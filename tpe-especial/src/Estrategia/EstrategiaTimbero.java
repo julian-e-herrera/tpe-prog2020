@@ -1,3 +1,7 @@
+package Estrategia;
+import General.Atributo;
+import General.Carta;
+
 public class EstrategiaTimbero extends Estrategia{
 
     public Atributo elegirAtributo(Carta ff) {

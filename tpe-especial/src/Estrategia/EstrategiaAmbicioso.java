@@ -1,3 +1,7 @@
+package Estrategia;
+import General.Atributo;
+import General.Carta;
+
 public class EstrategiaAmbicioso extends Estrategia {
 
     public EstrategiaAmbicioso(){}

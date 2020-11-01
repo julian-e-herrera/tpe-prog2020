@@ -1,3 +1,7 @@
+package Estrategia;
+import General.Atributo;
+import General.Carta;
+
 public class EstrategiaObstinado extends Estrategia {
     private String atributo;
 

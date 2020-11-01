@@ -1,3 +1,6 @@
+package Pocima;
+import General.Atributo;
+
 public class PocimaFija extends Pocima{
     private int valor;
 

@@ -1,3 +1,5 @@
+package Pocima;
+import General.Atributo;
 
 public abstract class Pocima {
     private String nombre;

@@ -1,3 +1,6 @@
+package Pocima;
+import General.Atributo;
+
 public class PocimaNormal extends Pocima {
     private double porcentaje;
 
