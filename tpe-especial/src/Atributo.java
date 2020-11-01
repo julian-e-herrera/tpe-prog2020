@@ -17,17 +17,6 @@ public class Atributo {
         return valor;
     }
 
-    public boolean comparar(Atributo ff, Criterio jj) {
-        return jj.cumple(ff);
-    }
-
-    public boolean mismoTipo(Atributo ff) {
-        if (ff.getNombre().equals(nombre)) {
-            return true;
-        } else
-            return false;
-    }
-
     @Override
     public boolean equals(Object obj) {
         try {

@@ -1,6 +1,14 @@
-public abstract class Pocima{
+
+public abstract class Pocima {
     private String nombre;
 
-    public abstract int calculaValor();
+    public Pocima(String nombre) {
+        this.nombre = nombre;
+    }
 
+    public abstract Atributo calculaValor(Atributo ff);
+
+    public String getNombre() {
+        return nombre;
+    }
 }

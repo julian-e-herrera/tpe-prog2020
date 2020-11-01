@@ -3,21 +3,23 @@ import java.util.Collections;
 
 public class Jugador {
         private String nombre;
-        private boolean esMano;
         private ArrayList<Carta> mazo;
+        Estrategia estrategiaJugador;
 
         public Jugador(String nombre) {
                 this.nombre = nombre;
-                esMano = false;
                 mazo = new ArrayList<Carta>();
+                estrategiaJugador = new EstrategiaTimbero();
         }
 
-        public boolean getMano() {
-                return esMano;
+        public Jugador(String nombre, Estrategia ff) {
+                this.nombre = nombre;
+                mazo = new ArrayList<Carta>();
+                estrategiaJugador = ff;
         }
 
-        public void setMano(boolean esMano) {
-                this.esMano = esMano;
+        public void cambiarEstrategia(Estrategia ff){
+                estrategiaJugador = ff;
         }
 
         public String getNombre() {
@@ -60,13 +62,24 @@ public class Jugador {
                 return nombre + ", " + "Cantidad de cartas: " + this.getLargoMazo();
         }
 
-        public Atributo elegirAtributo(Carta ff) {
-                int atributo;
+        public void mostrarAtributoSeleccionado(Atributo ff) {
+                System.out.println("El jugador " + this.getNombre() + " selecciona competir por el atributo "
+                                + ff.getNombre());
+        }
 
-                int atributos = ff.getCantAtributos();
+        public void mostrarCartaConValores(Atributo ff) {
+                String retorno = "La carta de " + this.getNombre() + " es " + this.getPrimerCarta().getNombre()
+                                + " con " + ff.getNombre() + " " + ff.getValor();
 
-                atributo = (int) (Math.random() * atributos);
+                if (this.getPrimerCarta().getPocima() != null) {
+                        retorno += ", se aplicó pócima " + this.getPrimerCarta().getPocima().getNombre()
+                                        + " valor resultante " + getPrimerCarta().getPocima().calculaValor(ff);
+                }
 
-                return ff.getAtributo(atributo);
+                System.out.println(retorno);
+        }
+
+        public Atributo elegirAtributo(Carta ff){
+                return estrategiaJugador.elegirAtributo(ff);
         }
 }

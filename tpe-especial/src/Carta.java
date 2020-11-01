@@ -1,32 +1,30 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 
-public class Carta implements Comparator<Atributo> {
+public class Carta {
     private String nombre;
     private ArrayList<Atributo> atributos;
+    private Pocima pocima;
 
     public Carta(String nombre, ArrayList<Atributo> atributosSueltos) {
         atributos = new ArrayList<Atributo>(atributosSueltos);
         this.nombre = nombre;
+        pocima = null;
     }
-
-    public Carta(){}
 
     public String getNombre() {
         return nombre;
     }
 
-    @Override
-    public int compare(Atributo a1, Atributo a2) {
-        return a1.getValor() - a2.getValor();
+    public void setPocima(Pocima pocima) {
+        this.pocima = pocima;
+    }
+
+    public Pocima getPocima() {
+        return pocima;
     }
 
     public int getCantAtributos() {
         return atributos.size();
-    }
-
-    public ArrayList<Atributo> getAllAtributos() {
-        return new ArrayList<Atributo>(atributos);
     }
 
     public Atributo getAtributo(int i) {
@@ -34,7 +32,7 @@ public class Carta implements Comparator<Atributo> {
     }
 
     public Atributo getAtributo(Atributo a) {
-        //nunca te va a dar null, pero hay que poner algo xd
+        // nunca te va a dar null, pero hay que poner algo xd
         Atributo aux = null;
         for (Atributo atributo : atributos) {
             if (a.equals(atributo)) {
@@ -42,15 +40,6 @@ public class Carta implements Comparator<Atributo> {
             }
         }
         return aux;
-    }
-
-    protected void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-
-    protected void setAtributos(ArrayList<Atributo> atributos){
-        atributos.clear();
-        atributos.addAll(atributos);
     }
 
     public Atributo getAtributoPorNombre(String nombre) {
@@ -67,8 +56,17 @@ public class Carta implements Comparator<Atributo> {
         return atributos.get(i);
     }
 
-    public boolean esIgual(Carta ff){
-        return ((this.equals(ff)&& (ff.getNombre().equals(this.nombre))));
+    public Atributo calcularAtributo(Atributo ff) {
+        Atributo atributo;
+        if (pocima != null) {
+            atributo = pocima.calculaValor(ff);
+        } else
+            atributo = ff;
+        return atributo;
+    }
+
+    public boolean esIgual(Carta ff) {
+        return ((this.equals(ff) && (ff.getNombre().equals(this.nombre))));
     }
 
     @Override
@@ -78,9 +76,10 @@ public class Carta implements Comparator<Atributo> {
 
             // si la carta tiene la misma cantidad de atributos, comprueba
             if ((cartaAux.getCantAtributos() == atributos.size())) {
+
                 // si los nombres de los atributos son los mismos
-                for (Atributo atributo : cartaAux.getAllAtributos()) {
-                    if (!(atributos.contains(atributo))) {
+                for (int j = 0; j < atributos.size(); j++) {
+                    if (!(atributos.contains(cartaAux.getAtributo(j)))) {
                         return false;
                     }
                 }
@@ -91,6 +90,10 @@ public class Carta implements Comparator<Atributo> {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public boolean contieneAtributo(Atributo ff) {
+        return this.atributos.contains(ff);
     }
 
     @Override

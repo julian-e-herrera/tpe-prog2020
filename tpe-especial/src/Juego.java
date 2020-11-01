@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Juego {
     private Jugador jugador1;
     private Jugador jugador2;
-    private Jugador jugadorAuxiliar;
+    private Jugador jugadorPrincipal;
     private Jugador jugadorOpuesto;
     private int rondas;
     private Mazo mazoDeCartas;
@@ -27,33 +27,59 @@ public class Juego {
         mazoDeCartas = new Mazo(mazoPath);
     }
 
+    public Juego(Jugador j1, Jugador j2, int rondas, String mazoPath, ArrayList<Pocima> pocimas) {
+
+        jugador1 = j1;
+        jugador2 = j2;
+
+        jugadores = new ArrayList<Jugador>();
+        jugadores.add(j1);
+        jugadores.add(j2);
+
+        this.rondas = rondas;
+
+        //uso las pocimas dadas para que el mazo se encargue
+        mazoDeCartas = new Mazo(mazoPath, pocimas);
+    }
 
     public void jugar() {
 
-        jugadorAuxiliar = iniciarJuego();
-        jugadorOpuesto = encontrarOpuesto(jugadorAuxiliar);
-        
-        jugadorAuxiliar.mezclar();
+        jugadorPrincipal = iniciarJuego();
+        jugadorOpuesto = encontrarOpuesto(jugadorPrincipal);
+
+        jugadorPrincipal.mezclar();
         jugadorOpuesto.mezclar();
         int i = 1;
-        
-        while ((i <= rondas) && (jugadorAuxiliar.getLargoMazo() > 0) && (jugadorOpuesto.getLargoMazo() > 0)) {
-            
+
+        while ((i <= rondas) && (jugadorPrincipal.getLargoMazo() > 0) && (jugadorOpuesto.getLargoMazo() > 0)) {
+
             System.out.println("----------------- " + " ronda " + i + " -----------------");
 
-            Atributo atributo = jugadorAuxiliar.elegirAtributo(jugadorAuxiliar.getPrimerCarta());
+            Carta cartaPrincipal = jugadorPrincipal.getPrimerCarta();
+
+            Atributo atributo = jugadorPrincipal.elegirAtributo(cartaPrincipal);
             Atributo atributoOpuesto = jugadorOpuesto.getPrimerCarta().getAtributo(atributo);
 
-            System.out.println("El jugador " + jugadorAuxiliar.getNombre() + " Selecciona competir por el atributo " + atributo.getNombre());
-            System.out.println("La carta de " + jugadorAuxiliar.getNombre() + " es " + jugadorAuxiliar.getPrimerCarta().getNombre()+ " con " + atributo.getNombre() + " " + atributo.getValor());
-            System.out.println("La carta de " + jugadorOpuesto.getNombre() + " es " + jugadorOpuesto.getPrimerCarta().getNombre()+ " con " + atributoOpuesto.getNombre() + " " + atributoOpuesto.getValor());
-            
-            int resultado = jugadorAuxiliar.getPrimerCarta().compare(atributo, atributoOpuesto);
-            declararGanadorDeRonda(resultado);
-            
+            // Mostrar por consola
+            jugadorPrincipal.mostrarAtributoSeleccionado(atributo);
+            jugadorPrincipal.mostrarCartaConValores(atributo);
+            jugadorOpuesto.mostrarCartaConValores(atributoOpuesto);
 
-            System.out.println("Gana la ronda " + jugadorAuxiliar.getNombre());
-            System.out.println(jugadorAuxiliar.getNombre() + " posee ahora " + jugadorAuxiliar.getLargoMazo() + " cartas y " + jugadorOpuesto.getNombre() + " posee ahora " + jugadorOpuesto.getLargoMazo() + " cartas.");
+            // que me devuelvan los valores calculados
+            Atributo atributoPrincipal = jugadorPrincipal.getPrimerCarta().calcularAtributo(atributo);
+            Atributo atributoSecundario = jugadorOpuesto.getPrimerCarta().calcularAtributo(atributoOpuesto);
+
+
+            // no se porque estaba usando atributos ahora uso ints
+            int resultado = atributoPrincipal.getValor() - atributoSecundario.getValor();
+
+            declararGanadorDeRonda(resultado);
+
+            // muestra por consola quien gano
+            System.out.println("Gana la ronda " + jugadorPrincipal.getNombre());
+            System.out.println(jugadorPrincipal.getNombre() + " posee ahora " + jugadorPrincipal.getLargoMazo()
+                    + " cartas y " + jugadorOpuesto.getNombre() + " posee ahora " + jugadorOpuesto.getLargoMazo()
+                    + " cartas.");
 
             i++;
         }
@@ -62,24 +88,24 @@ public class Juego {
 
     public Jugador iniciarJuego() {
         repartirMazo();
-        Jugador jugadorAuxiliar;
+        Jugador jugadorPrincipal;
 
         if (jugador1.getLargoMazo() >= jugador2.getLargoMazo()) {
-            jugadorAuxiliar = jugador1;
+            jugadorPrincipal = jugador1;
         } else
-            jugadorAuxiliar = jugador2;
-        return jugadorAuxiliar;
+            jugadorPrincipal = jugador2;
+        return jugadorPrincipal;
     }
 
     public void declararGanadorDeRonda(int resultado) {
 
-        Carta cartaPrincipal = jugadorAuxiliar.getPrimerCarta();
+        Carta cartaPrincipal = jugadorPrincipal.getPrimerCarta();
         Carta cartaSecundaria = jugadorOpuesto.getPrimerCarta();
 
         if (resultado > 0) {
 
-            jugadorAuxiliar.moverCartaAlFondo(cartaPrincipal);
-            jugadorAuxiliar.addCarta(cartaSecundaria);
+            jugadorPrincipal.moverCartaAlFondo(cartaPrincipal);
+            jugadorPrincipal.addCarta(cartaSecundaria);
 
             jugadorOpuesto.removerCarta(cartaSecundaria);
 
@@ -88,17 +114,17 @@ public class Juego {
             jugadorOpuesto.moverCartaAlFondo(cartaSecundaria);
             jugadorOpuesto.addCarta(cartaPrincipal);
 
-            jugadorAuxiliar.removerCarta(cartaPrincipal);
+            jugadorPrincipal.removerCarta(cartaPrincipal);
 
-            Jugador aux = jugadorAuxiliar;
-            jugadorAuxiliar = jugadorOpuesto;
+            Jugador aux = jugadorPrincipal;
+            jugadorPrincipal = jugadorOpuesto;
             jugadorOpuesto = aux;
 
         } else {
-            jugadorAuxiliar.moverCartaAlFondo(cartaPrincipal);
+            jugadorPrincipal.moverCartaAlFondo(cartaPrincipal);
 
             jugadorOpuesto.moverCartaAlFondo(cartaSecundaria);
-            
+
         }
     }
 

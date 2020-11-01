@@ -1,12 +1,19 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\Dask\\Downloads\\javax.json-1.1.4.jar"
+        "c:\\Users\\Dask\\Downloads\\javax.json-1.1.4.jar",
+        "c:\\Users\\octav\\Desktop\\TPE final\\javax.json-1.1.4.jar"
     ],
     "extensions.ignoreRecommendations": true,
     "files.autoSave": "off",
     "typescript.tsc.autoDetect": "off",
     "npm.autoDetect": "off",
     "debug.allowBreakpointsEverywhere": true,
-    "html.autoClosingTags": false
+    "html.autoClosingTags": false,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
 }

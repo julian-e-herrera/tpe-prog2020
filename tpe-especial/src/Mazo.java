@@ -12,21 +12,30 @@ import java.util.Collections;
 public class Mazo {
 
     private ArrayList<Carta> mazoCartas;
+    private ArrayList<Pocima> pocimas;
 
     public Mazo() {
         mazoCartas = new ArrayList<Carta>();
+        pocimas = new ArrayList<Pocima>();
     }
 
     public Mazo(String mazoPath) {
         mazoCartas = new ArrayList<Carta>();
+        pocimas = new ArrayList<Pocima>();
         this.procesar(mazoPath);
     }
 
-    protected ArrayList<Carta> getMazo(){
+    public Mazo(String mazoPath, ArrayList<Pocima> pocimas) {
+        mazoCartas = new ArrayList<Carta>();
+        this.pocimas = new ArrayList<Pocima>(pocimas);
+        this.procesar(mazoPath);
+    }
+
+    protected ArrayList<Carta> getMazo() {
         return new ArrayList<Carta>(mazoCartas);
     }
 
-    public boolean contieneCarta(Carta ff){
+    public boolean contieneCarta(Carta ff) {
         boolean contiene = false;
 
         for (Carta carta : mazoCartas) {
@@ -52,13 +61,13 @@ public class Mazo {
 
             for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
                 // cartaAux es una carta creada donde le asigno el nombre
-                
+
                 // agarro los atributos del json
                 JsonObject atributos = carta.getJsonObject("atributos");
                 ArrayList<Atributo> atributosDeCarta = new ArrayList<Atributo>();
                 // los recorro
                 for (String atributo : atributos.keySet()) {
-                    
+
                     // asigno nombre, valor
                     Atributo atributoAux = new Atributo(atributo, atributos.getInt(atributo));
                     atributosDeCarta.add(atributoAux);
@@ -94,6 +103,10 @@ public class Mazo {
 
         Collections.shuffle(mazoCartas);
 
+        if (pocimas.size() > 0) {
+            repartirPociones();
+        }
+
         // si el mazo es par...
         if (mazoCartas.size() % 2 == 0) {
 
@@ -115,11 +128,19 @@ public class Mazo {
             }
         }
 
+    }
 
+    private void repartirPociones() {
+        int posicionElegida;
 
+        for (Pocima pocima : pocimas) {
+            posicionElegida = (int) (Math.random() * mazoCartas.size());
 
+            Carta aux;
+            aux = mazoCartas.get(posicionElegida);
 
-        
+            aux.setPocima(pocima);
+        }
     }
 
 }
