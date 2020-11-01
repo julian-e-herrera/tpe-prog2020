@@ -18,7 +18,7 @@ public class Jugador {
                 estrategiaJugador = ff;
         }
 
-        public void cambiarEstrategia(Estrategia ff){
+        public void cambiarEstrategia(Estrategia ff) {
                 estrategiaJugador = ff;
         }
 
@@ -72,14 +72,15 @@ public class Jugador {
                                 + " con " + ff.getNombre() + " " + ff.getValor();
 
                 if (this.getPrimerCarta().getPocima() != null) {
-                        retorno += ", se aplicó pócima " + this.getPrimerCarta().getPocima().getNombre()
-                                        + " valor resultante " + getPrimerCarta().getPocima().calculaValor(ff);
+                        retorno += ", se aplicó pócima " + "'" + this.getPrimerCarta().getPocima().getNombre() + "'"
+                                        + " valor resultante "
+                                        + getPrimerCarta().getPocima().calculaValor(ff).getValor();
                 }
 
                 System.out.println(retorno);
         }
 
-        public Atributo elegirAtributo(Carta ff){
+        public Atributo elegirAtributo(Carta ff) {
                 return estrategiaJugador.elegirAtributo(ff);
         }
 }
