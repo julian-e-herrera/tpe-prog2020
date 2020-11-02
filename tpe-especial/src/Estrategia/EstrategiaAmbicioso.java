@@ -2,7 +2,7 @@ package Estrategia;
 import General.Atributo;
 import General.Carta;
 
-public class EstrategiaAmbicioso extends Estrategia {
+public class EstrategiaAmbicioso implements Estrategia {
 
     public EstrategiaAmbicioso(){}
 
