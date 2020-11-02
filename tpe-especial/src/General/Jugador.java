@@ -8,7 +8,7 @@ import Estrategia.EstrategiaTimbero;
 public class Jugador {
         private String nombre;
         private ArrayList<Carta> mazo;
-        Estrategia estrategiaJugador;
+        private Estrategia estrategiaJugador;
 
         public Jugador(String nombre) {
                 this.nombre = nombre;
