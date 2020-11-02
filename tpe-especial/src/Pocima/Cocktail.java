@@ -1,7 +1,6 @@
-package General;
+package Pocima;
 import java.util.ArrayList;
-
-import Pocima.Pocima;
+import General.Atributo;
 
 public class Cocktail extends Pocima {
     private ArrayList<Pocima> pocimas;

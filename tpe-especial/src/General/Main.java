@@ -5,6 +5,7 @@ import Pocima.Pocima;
 import Pocima.PocimaFija;
 import Pocima.PocimaNormal;
 import Pocima.PocimaSelectiva;
+import Pocima.Cocktail;
 
 public class Main {
     public static void main(String[] args) {
