@@ -34,4 +34,10 @@ public class Atributo {
     public String toString() {
         return "Nombre: " + nombre + ", " + "Valor: " + valor;
     }
+
+
+    //Se usa solamente en el Cocktail.
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
 }

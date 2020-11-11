@@ -9,6 +9,7 @@ public class Juego {
     private Jugador jugadorOpuesto;
     private int rondas;
     private Mazo mazoDeCartas;
+
     private ArrayList<Jugador> jugadores;
     private ArrayList<String> gameLog;
 
@@ -64,10 +65,9 @@ public class Juego {
             i++;
         }
 
-        for (String string : gameLog) {
-            System.out.println(string);
-        }
-
+    }
+    public ArrayList<String> getGameLog() {
+        return new ArrayList<String>(gameLog);
     }
 
     public Jugador iniciarJuego() {

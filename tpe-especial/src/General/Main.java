@@ -32,11 +32,11 @@ public class Main {
         pruebaCocktail.agregarPocima(fortalecedora2);
         pruebaCocktail.agregarPocima(kriptonita2);
 
-        // Cocktail cocktailLetal = new Cocktail("Cocktail");
-        // PocimaFija pocimaMala = new PocimaFija("Muerte Asegurada", 1);
-        // cocktailLetal.agregarPocima(pocimaMala);
+        Cocktail cocktailLetal = new Cocktail("Cocktail");
+        PocimaFija pocimaMala = new PocimaFija("Muerte Asegurada", 1);
+        cocktailLetal.agregarPocima(pocimaMala);
 
-        // pruebaCocktail.agregarPocima(cocktailLetal);
+        pruebaCocktail.agregarPocima(cocktailLetal);
 
         pocimas.add(vale4);
         pocimas.add(pocimaFuerza);
@@ -56,5 +56,11 @@ public class Main {
 
         Juego prueba = new Juego(jugador1, jugador2, 40, mazo);
         prueba.jugar();
+
+        ArrayList<String> logDeJuego = prueba.getGameLog();
+
+        for (String string : logDeJuego) {
+            System.out.println(string);
+        }
     }
 }

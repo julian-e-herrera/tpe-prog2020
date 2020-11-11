@@ -1,4 +1,5 @@
 package Pocima;
+
 import java.util.ArrayList;
 import General.Atributo;
 
@@ -16,10 +17,11 @@ public class Cocktail extends Pocima {
 
     public int calculaValor(Atributo ff) {
         int retorno = 0;
+        Atributo aux = new Atributo(ff.getNombre(), ff.getValor());
 
         for (Pocima pocima : pocimas) {
-            //si ff tiene en base el numero 5, todos los calculos se hacen con el 5 o con el resultado anterior?
-            retorno += pocima.calculaValor(ff);
+            retorno = pocima.calculaValor(aux);
+            aux.setValor(retorno);
         }
         return retorno;
     }

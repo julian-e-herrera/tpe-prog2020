@@ -1,6 +1,5 @@
 package General;
 
-
 import Pocima.Pocima;
 
 import java.util.ArrayList;
@@ -20,17 +19,6 @@ public class Mazo {
         mazoCartas = new ArrayList<Carta>(cartas);
         this.pocimas = new ArrayList<Pocima>(pocimas);
     }
-    
-    // public boolean contieneCarta(Carta ff) {
-    //     boolean contiene = false;
-
-    //     for (Carta carta : mazoCartas) {
-    //         if (carta.esIgual(ff)) {
-    //             return true;
-    //         }
-    //     }
-    //     return contiene;
-    // }
 
     public void repartirCartas(Jugador j1, Jugador j2) {
 

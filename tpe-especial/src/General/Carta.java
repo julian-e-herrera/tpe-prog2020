@@ -35,17 +35,6 @@ public class Carta {
         return atributos.get(i);
     }
 
-    public Atributo getAtributo(Atributo a) {
-        // nunca te va a dar null, pero hay que poner algo xd
-        Atributo aux = null;
-        for (Atributo atributo : atributos) {
-            if (a.equals(atributo)) {
-                aux = atributo;
-            }
-        }
-        return aux;
-    }
-
     public Atributo getAtributoPorNombre(String nombre) {
         boolean encontrado = false;
         int i = 0;
@@ -61,6 +50,7 @@ public class Carta {
     }
 
     public int calcularAtributo(String ff) {
+        //si no tiene pocima, que devuelva el valor original, si tiene, que lo calcule
         Atributo atributo = this.getAtributoPorNombre(ff);
         int aux = atributo.getValor();
 
@@ -83,12 +73,6 @@ public class Carta {
             if ((cartaAux.getCantAtributos() == atributos.size())) {
 
                 // si los nombres de los atributos son los mismos
-                
-                // for (int j = 0; j < atributos.size(); j++) {
-                //     if (!(atributos.contains(cartaAux.getAtributo(j)))) {
-                //         return false;
-                //     }
-                // }
                 for (Atributo atributo : atributos) {
                     if (!(cartaAux.contieneAtributo(atributo))) {
                         return false;

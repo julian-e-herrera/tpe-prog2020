@@ -14,6 +14,4 @@ public abstract class Pocima {
         return nombre;
     }
 
-
-    // public abstract Atributo calculaValor(Atributo ff);
 }
