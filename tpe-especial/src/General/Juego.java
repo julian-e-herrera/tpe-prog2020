@@ -1,7 +1,6 @@
 package General;
-import java.util.ArrayList;
 
-import Pocima.Pocima;
+import java.util.ArrayList;
 
 public class Juego {
     private Jugador jugador1;
@@ -11,38 +10,22 @@ public class Juego {
     private int rondas;
     private Mazo mazoDeCartas;
     private ArrayList<Jugador> jugadores;
+    private ArrayList<String> gameLog;
 
-    public Juego(Jugador j1, Jugador j2, int rondas, String mazoPath) {
-
-        // String mazoPath = "./superheroes.json";
+    public Juego(Jugador j1, Jugador j2, int rondas, Mazo mazo) {
 
         jugador1 = j1;
         jugador2 = j2;
 
         // creo un araylist para recorrer los jugadores, para encontrar el opuesto
-        // es feo? si, feo como patada en los huevos pero funca
 
         jugadores = new ArrayList<Jugador>();
         jugadores.add(j1);
         jugadores.add(j2);
 
         this.rondas = rondas;
-        mazoDeCartas = new Mazo(mazoPath);
-    }
-
-    public Juego(Jugador j1, Jugador j2, int rondas, String mazoPath, ArrayList<Pocima> pocimas) {
-
-        jugador1 = j1;
-        jugador2 = j2;
-
-        jugadores = new ArrayList<Jugador>();
-        jugadores.add(j1);
-        jugadores.add(j2);
-
-        this.rondas = rondas;
-
-        //uso las pocimas dadas para que el mazo se encargue
-        mazoDeCartas = new Mazo(mazoPath, pocimas);
+        this.mazoDeCartas = mazo;
+        gameLog = new ArrayList<String>();
     }
 
     public void jugar() {
@@ -56,35 +39,33 @@ public class Juego {
 
         while ((i <= rondas) && (jugadorPrincipal.getLargoMazo() > 0) && (jugadorOpuesto.getLargoMazo() > 0)) {
 
-            System.out.println("----------------- " + " ronda " + i + " -----------------");
+            gameLog.add("----------------- " + " ronda " + i + " -----------------");
 
-            Carta cartaPrincipal = jugadorPrincipal.getPrimerCarta();
-
-            Atributo atributo = jugadorPrincipal.elegirAtributo(cartaPrincipal);
-            Atributo atributoOpuesto = jugadorOpuesto.getPrimerCarta().getAtributo(atributo);
+            String nombreAtributo = jugadorPrincipal.elegirAtributo();
 
             // Mostrar por consola
-            jugadorPrincipal.mostrarAtributoSeleccionado(atributo);
-            jugadorPrincipal.mostrarCartaConValores(atributo);
-            jugadorOpuesto.mostrarCartaConValores(atributoOpuesto);
+            gameLog.add(jugadorPrincipal.mostrarAtributoSeleccionado(nombreAtributo));
+            gameLog.add(jugadorPrincipal.mostrarCartaConValores(nombreAtributo));
+            gameLog.add(jugadorOpuesto.mostrarCartaConValores(nombreAtributo));
 
             // que me devuelvan los valores calculados
-            Atributo atributoPrincipal = jugadorPrincipal.getPrimerCarta().calcularAtributo(atributo);
-            Atributo atributoSecundario = jugadorOpuesto.getPrimerCarta().calcularAtributo(atributoOpuesto);
+            int valorAtributoPrincipal = jugadorPrincipal.getPrimerCarta().calcularAtributo(nombreAtributo);
+            int valorAtributoSecundario = jugadorOpuesto.getPrimerCarta().calcularAtributo(nombreAtributo);
 
-
-            // no se porque estaba usando atributos ahora uso ints
-            int resultado = atributoPrincipal.getValor() - atributoSecundario.getValor();
+            int resultado = valorAtributoPrincipal - valorAtributoSecundario;
 
             declararGanadorDeRonda(resultado);
 
             // muestra por consola quien gano
-            System.out.println("Gana la ronda " + jugadorPrincipal.getNombre());
-            System.out.println(jugadorPrincipal.getNombre() + " posee ahora " + jugadorPrincipal.getLargoMazo()
-                    + " cartas y " + jugadorOpuesto.getNombre() + " posee ahora " + jugadorOpuesto.getLargoMazo()
-                    + " cartas.");
+            gameLog.add("Gana la ronda " + jugadorPrincipal.getNombre());
+            gameLog.add(jugadorPrincipal.getNombre() + " posee ahora " + jugadorPrincipal.getLargoMazo() + " cartas y "
+                    + jugadorOpuesto.getNombre() + " posee ahora " + jugadorOpuesto.getLargoMazo() + " cartas.");
 
             i++;
+        }
+
+        for (String string : gameLog) {
+            System.out.println(string);
         }
 
     }

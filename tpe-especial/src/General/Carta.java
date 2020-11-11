@@ -1,4 +1,5 @@
 package General;
+
 import java.util.ArrayList;
 
 import Pocima.Pocima;
@@ -59,13 +60,14 @@ public class Carta {
         return atributos.get(i);
     }
 
-    public Atributo calcularAtributo(Atributo ff) {
-        Atributo atributo;
+    public int calcularAtributo(String ff) {
+        Atributo atributo = this.getAtributoPorNombre(ff);
+        int aux = atributo.getValor();
+
         if (pocima != null) {
-            atributo = pocima.calculaValor(ff);
-        } else
-            atributo = ff;
-        return atributo;
+            aux = pocima.calculaValor(atributo);
+        }
+        return aux;
     }
 
     public boolean esIgual(Carta ff) {
@@ -81,8 +83,14 @@ public class Carta {
             if ((cartaAux.getCantAtributos() == atributos.size())) {
 
                 // si los nombres de los atributos son los mismos
-                for (int j = 0; j < atributos.size(); j++) {
-                    if (!(atributos.contains(cartaAux.getAtributo(j)))) {
+                
+                // for (int j = 0; j < atributos.size(); j++) {
+                //     if (!(atributos.contains(cartaAux.getAtributo(j)))) {
+                //         return false;
+                //     }
+                // }
+                for (Atributo atributo : atributos) {
+                    if (!(cartaAux.contieneAtributo(atributo))) {
                         return false;
                     }
                 }

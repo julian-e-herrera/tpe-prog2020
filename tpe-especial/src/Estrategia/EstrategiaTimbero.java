@@ -1,16 +1,16 @@
 package Estrategia;
-import General.Atributo;
+// import General.Atributo;
 import General.Carta;
 
 public class EstrategiaTimbero implements Estrategia{
 
-    public Atributo elegirAtributo(Carta ff) {
+    public String elegirAtributo(Carta ff) {
         int atributo;
 
         int atributos = ff.getCantAtributos();
 
         atributo = (int) (Math.random() * atributos);
 
-        return ff.getAtributo(atributo);
+        return ff.getAtributo(atributo).getNombre();
 }
 }

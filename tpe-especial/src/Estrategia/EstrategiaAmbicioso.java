@@ -1,13 +1,15 @@
 package Estrategia;
+
 import General.Atributo;
 import General.Carta;
 
 public class EstrategiaAmbicioso implements Estrategia {
 
-    public EstrategiaAmbicioso(){}
+    public EstrategiaAmbicioso() {
+    }
 
     @Override
-    public Atributo elegirAtributo(Carta ff) {
+    public String elegirAtributo(Carta ff) {
         int valor = 0;
         Atributo aux = null;
         for (int i = 0; i < ff.getCantAtributos(); i++) {
@@ -17,6 +19,6 @@ public class EstrategiaAmbicioso implements Estrategia {
                 aux = atributoSubi;
             }
         }
-        return aux;
+        return aux.getNombre();
     }
 }

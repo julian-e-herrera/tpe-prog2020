@@ -1,25 +1,21 @@
 package Pocima;
+
 import General.Atributo;
 
-public class PocimaSelectiva extends Pocima {
+public class PocimaSelectiva extends PocimaNormal {
     private String selector;
-    private double porcentaje;
 
     public PocimaSelectiva(String nombre, String selector, double porcentaje) {
-        super(nombre);
+        super(nombre, porcentaje);
         this.selector = selector;
-        this.porcentaje = porcentaje;
     }
 
     @Override
-    public Atributo calculaValor(Atributo ff) {
-        Atributo retorno;
+    public int calculaValor(Atributo ff) {
+        int retorno = ff.getValor();
         if (ff.getNombre().equals(selector)) {
-            double resultado = ff.getValor() * porcentaje;
-            int valorRedondeado = (int) resultado;
-            retorno = new Atributo(ff.getNombre(), valorRedondeado);
-        } else
-            retorno = ff;
+            retorno = super.calculaValor(ff);
+        }
         return retorno;
     }
 }

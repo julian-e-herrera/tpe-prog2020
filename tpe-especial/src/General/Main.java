@@ -10,7 +10,9 @@ import Pocima.Cocktail;
 public class Main {
     public static void main(String[] args) {
 
-        String mazoPath = "src/superheroes.json";
+        String mazoPath = "superheroes.json";
+
+        ProcesadorDeCartas cardProcessor = new ProcesadorDeCartas(mazoPath);
 
         ArrayList<Pocima> pocimas = new ArrayList<Pocima>();
 
@@ -30,11 +32,11 @@ public class Main {
         pruebaCocktail.agregarPocima(fortalecedora2);
         pruebaCocktail.agregarPocima(kriptonita2);
 
-        Cocktail cocktailLetal = new Cocktail("Cocktail");
-        PocimaFija pocimaMala = new PocimaFija("Muerte Asegurada", 1);
-        cocktailLetal.agregarPocima(pocimaMala);
+        // Cocktail cocktailLetal = new Cocktail("Cocktail");
+        // PocimaFija pocimaMala = new PocimaFija("Muerte Asegurada", 1);
+        // cocktailLetal.agregarPocima(pocimaMala);
 
-        pruebaCocktail.agregarPocima(cocktailLetal);
+        // pruebaCocktail.agregarPocima(cocktailLetal);
 
         pocimas.add(vale4);
         pocimas.add(pocimaFuerza);
@@ -50,7 +52,9 @@ public class Main {
         Jugador jugador1 = new Jugador("Juan");
         Jugador jugador2 = new Jugador("Pablo");
 
-        Juego prueba = new Juego(jugador1, jugador2, 40, mazoPath, pocimas);
+        Mazo mazo = new Mazo(cardProcessor.devolverMazoFiltrado(), pocimas);
+
+        Juego prueba = new Juego(jugador1, jugador2, 40, mazo);
         prueba.jugar();
     }
 }

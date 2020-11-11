@@ -1,4 +1,5 @@
 package General;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -66,25 +67,30 @@ public class Jugador {
                 return nombre + ", " + "Cantidad de cartas: " + this.getLargoMazo();
         }
 
-        public void mostrarAtributoSeleccionado(Atributo ff) {
-                System.out.println("El jugador " + this.getNombre() + " selecciona competir por el atributo "
-                                + ff.getNombre());
+        public String mostrarAtributoSeleccionado(String ff) {
+                String retorno = "El jugador " + this.getNombre() + " selecciona competir por el atributo "
+                                + ff ;
+
+                return retorno;
         }
 
-        public void mostrarCartaConValores(Atributo ff) {
+        public String mostrarCartaConValores(String ff) {
+                Atributo atributoPrincipal = this.getPrimerCarta().getAtributoPorNombre(ff);
+
                 String retorno = "La carta de " + this.getNombre() + " es " + this.getPrimerCarta().getNombre()
-                                + " con " + ff.getNombre() + " " + ff.getValor();
+                                + " con " + ff + " " + atributoPrincipal.getValor();
 
                 if (this.getPrimerCarta().getPocima() != null) {
                         retorno += ", se aplicó pócima " + "'" + this.getPrimerCarta().getPocima().getNombre() + "'"
                                         + " valor resultante "
-                                        + getPrimerCarta().getPocima().calculaValor(ff).getValor();
+                                        + getPrimerCarta().getPocima().calculaValor(atributoPrincipal);
                 }
 
-                System.out.println(retorno);
+                return retorno;
         }
 
-        public Atributo elegirAtributo(Carta ff) {
+        public String elegirAtributo() {
+                Carta ff = this.getPrimerCarta();
                 return estrategiaJugador.elegirAtributo(ff);
         }
 }

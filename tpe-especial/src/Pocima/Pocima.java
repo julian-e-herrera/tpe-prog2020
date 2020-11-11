@@ -8,9 +8,12 @@ public abstract class Pocima {
         this.nombre = nombre;
     }
 
-    public abstract Atributo calculaValor(Atributo ff);
+    public abstract int calculaValor(Atributo ff);
 
     public String getNombre() {
         return nombre;
     }
+
+
+    // public abstract Atributo calculaValor(Atributo ff);
 }

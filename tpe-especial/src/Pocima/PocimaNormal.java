@@ -10,10 +10,14 @@ public class PocimaNormal extends Pocima {
     }
 
     @Override
-    public Atributo calculaValor(Atributo ff) {
+    public int calculaValor(Atributo ff) {
         double resultado = ff.getValor() * porcentaje;
         int valorRedondeado = (int) resultado;
 
-        return new Atributo(ff.getNombre(), valorRedondeado);
+        return valorRedondeado;
+    }
+
+    public double getPorcentaje() {
+        return porcentaje;
     }
 }

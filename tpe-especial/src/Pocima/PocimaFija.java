@@ -10,7 +10,7 @@ public class PocimaFija extends Pocima{
     }
 
     @Override
-    public Atributo calculaValor(Atributo ff) {
-        return new Atributo(ff.getNombre(), valor);
+    public int calculaValor(Atributo ff) {
+        return valor;
     }
 }

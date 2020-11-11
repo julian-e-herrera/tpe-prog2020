@@ -1,5 +1,4 @@
 package Estrategia;
-import General.Atributo;
 import General.Carta;
 
 public class EstrategiaObstinado implements Estrategia {
@@ -10,7 +9,7 @@ public class EstrategiaObstinado implements Estrategia {
     }
 
     @Override
-    public Atributo elegirAtributo(Carta ff) {
-        return ff.getAtributoPorNombre(atributo);
+    public String elegirAtributo(Carta ff) {
+        return atributo;
     }
 }

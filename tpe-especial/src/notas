@@ -1,0 +1,15 @@
+La Carta recibe un atributo por parametro y le aplica la pocima a ese atributo. 
+La carta ya conoce los atributos! Solo necesita que le indiques el nombre del atributo que queres.
+
+El mazo recibe un path y levanta el JSON, eso tendría que hacerse en el main. El mazo es un modelo de su diseño,
+ de la lógica que implementaron. El mazo solo deberia recibir cartas (es decir, otros modelos de su diseño).
+ Si esas cartas vienen de un json, de un xml, o lo cargaron a mano, al mazo no le tiene que interesar.
+
+ La pócima selectiva actualmente tiene código duplicado con la pócima normal.
+  Por como esta hecho deberia heredar de la pocima normal y llamar al super.aplicar().
+
+  La clase jugador tiene métodos que imprimen por pantalla. 
+
+  Para hacer el Log el Juego imprime por pantalla. Es mas prolijo si guarda los String en una lista de Strings
+   a forma de "registro", "log", "historial" o "bitacora", como mencionamos en las clases prácticas.
+

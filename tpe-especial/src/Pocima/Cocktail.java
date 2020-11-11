@@ -14,10 +14,12 @@ public class Cocktail extends Pocima {
         pocimas.add(ff);
     }
 
-    public Atributo calculaValor(Atributo ff) {
-        Atributo retorno = ff;
+    public int calculaValor(Atributo ff) {
+        int retorno = 0;
+
         for (Pocima pocima : pocimas) {
-            retorno = pocima.calculaValor(retorno);
+            //si ff tiene en base el numero 5, todos los calculos se hacen con el 5 o con el resultado anterior?
+            retorno += pocima.calculaValor(ff);
         }
         return retorno;
     }
